@@ -1,22 +1,54 @@
 grammar PHP
   rule program
-    ternary
+    nested_ternary / ternary / expression
   end
 
-  rule ternary
-    condition:condition _ "?" _ value_if_true:string _ ":" _ value_if_false:string {
+  rule nested_ternary
+    condition:ternary _ "?" _ options:options {
       def eval
-        if condition.eval
-          value_if_true.eval
+        if condition.true?
+          options.value_if_true.eval
         else
-          value_if_false.eval
+          options.value_if_false.eval
         end
       end
     }
   end
 
-  rule condition
+  rule ternary
+    condition:expression _ "?" _ options:options {
+      def true?
+        chosen_option.true?
+      end
+
+      def chosen_option
+        if condition.true?
+          options.value_if_true
+        else
+          options.value_if_false
+        end
+      end
+
+      def eval
+        chosen_option.eval
+      end
+    }
+  end
+
+  rule options
+    value_if_true:expression _ ":" _ value_if_false:expression
+  end
+
+  rule expression
+    boolean / string
+  end
+
+  rule boolean
     "TRUE" {
+      def true?
+        eval
+      end
+
       def eval
         true
       end
@@ -27,6 +59,10 @@ grammar PHP
     }
     /
     "FALSE" {
+      def true?
+        eval
+      end
+
       def eval
         false
       end
@@ -39,6 +75,10 @@ grammar PHP
 
   rule string
     '"' body:('\"' / !'"' .)* '"' {
+      def true?
+        true
+      end
+
       def eval
         body.text_value
       end
