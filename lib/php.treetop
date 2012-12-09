@@ -20,11 +20,19 @@ grammar PHP
       def eval
         true
       end
+
+      def to_s
+        "1"
+      end
     }
     /
     "FALSE" {
       def eval
         false
+      end
+
+      def to_s
+        " "
       end
     }
   end
