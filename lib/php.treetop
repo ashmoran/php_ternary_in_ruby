@@ -4,35 +4,11 @@ grammar PHP
   end
 
   rule nested_ternary
-    condition:ternary _ "?" _ options:options {
-      def eval
-        if condition.true?
-          options.value_if_true.eval
-        else
-          options.value_if_false.eval
-        end
-      end
-    }
+    condition:ternary _ "?" _ options:options <PHPTernary>
   end
 
   rule ternary
-    condition:expression _ "?" _ options:options {
-      def true?
-        chosen_option.true?
-      end
-
-      def chosen_option
-        if condition.true?
-          options.value_if_true
-        else
-          options.value_if_false
-        end
-      end
-
-      def eval
-        chosen_option.eval
-      end
-    }
+    condition:expression _ "?" _ options:options <PHPTernary>
   end
 
   rule options
@@ -44,45 +20,13 @@ grammar PHP
   end
 
   rule boolean
-    "TRUE" {
-      def true?
-        eval
-      end
-
-      def eval
-        true
-      end
-
-      def to_s
-        "1"
-      end
-    }
+    "TRUE" <PHPTrue>
     /
-    "FALSE" {
-      def true?
-        eval
-      end
-
-      def eval
-        false
-      end
-
-      def to_s
-        " "
-      end
-    }
+    "FALSE" <PHPFalse>
   end
 
   rule string
-    '"' body:('\"' / !'"' .)* '"' {
-      def true?
-        true
-      end
-
-      def eval
-        body.text_value
-      end
-    }
+    '"' body:('\"' / !'"' .)* '"' <PHPString>
   end
 
   rule _

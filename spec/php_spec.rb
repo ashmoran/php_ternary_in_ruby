@@ -53,10 +53,6 @@ describe PHP do
     # And this is the nut I'm trying to crack
     context "nested" do
       example do
-        parser.parse('TRUE ? "a" : TRUE ? "b" : "c"')
-        puts
-        puts parser.failure_reason
-        puts
         expect(
           parser.parse('TRUE ? "a" : TRUE ? "b" : "c"').eval
         ).to be == "b"
