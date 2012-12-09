@@ -1,0 +1,43 @@
+grammar PHP
+  rule program
+    ternary
+  end
+
+  rule ternary
+    condition:condition _ "?" _ value_if_true:string _ ":" _ value_if_false:string {
+      def eval
+        if condition.eval
+          value_if_true.eval
+        else
+          value_if_false.eval
+        end
+      end
+    }
+  end
+
+  rule condition
+    "TRUE" {
+      def eval
+        true
+      end
+    }
+    /
+    "FALSE" {
+      def eval
+        false
+      end
+    }
+  end
+
+  rule string
+    '"' body:('\"' / !'"' .)* '"' {
+      def eval
+        body.text_value
+      end
+    }
+  end
+
+  rule _
+    [ ]*
+  end
+end
