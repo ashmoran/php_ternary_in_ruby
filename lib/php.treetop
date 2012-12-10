@@ -1,6 +1,6 @@
 grammar PHP
   rule program
-    nested_nested_ternary / nested_ternary / ternary / expression
+    nested_nested_ternary / nested_ternary / ternary / value
   end
 
   rule nested_nested_ternary
@@ -12,14 +12,14 @@ grammar PHP
   end
 
   rule ternary
-    condition:expression _ "?" _ options:options <PHPTernary>
+    condition:value _ "?" _ options:options <PHPTernary>
   end
 
   rule options
-    value_if_true:expression _ ":" _ value_if_false:expression
+    value_if_true:value _ ":" _ value_if_false:value
   end
 
-  rule expression
+  rule value
     boolean / string
   end
 
