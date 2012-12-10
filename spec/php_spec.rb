@@ -53,6 +53,8 @@ describe PHP do
     # And this is the nut I'm trying to crack
     context "nested" do
       example do
+        tree = parser.parse('TRUE ? "a" : TRUE ? "b" : "c"')
+        puts parser.failure_reason
         expect(
           parser.parse('TRUE ? "a" : TRUE ? "b" : "c"').eval
         ).to be == "b"
@@ -76,6 +78,9 @@ describe PHP do
         ).to be == "c"
       end
 
+      # I don't actually know what PHP does here, but to be consistent(?!)
+      # with the above behaviour, this is the only thing I can think of that
+      # would make sense...
       context "twice" do
         example do
           expect(

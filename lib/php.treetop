@@ -1,14 +1,10 @@
 grammar PHP
   rule program
-    nested_nested_ternary / nested_ternary / ternary / value
-  end
-
-  rule nested_nested_ternary
-    condition:nested_ternary _ "?" _ options:options <PHPTernary>
+    nested_ternary / ternary / value
   end
 
   rule nested_ternary
-    condition:ternary _ "?" _ options:options <PHPTernary>
+    first:ternary rest_ternaries:(_ "?" _ options:options)+ <PHPNestedTernary>
   end
 
   rule ternary

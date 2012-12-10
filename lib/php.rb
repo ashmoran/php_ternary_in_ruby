@@ -2,6 +2,19 @@ require 'treetop'
 Treetop.load(File.dirname(__FILE__) + '/php')
 
 module PHP
+  class PHPNestedTernary < Treetop::Runtime::SyntaxNode
+    def eval
+      rest_ternaries.elements.inject(first.chosen_option) { |condition, ternary|
+        condition =
+          if condition.true?
+            ternary.options.value_if_true
+          else
+            ternary.options.value_if_false
+          end
+      }.eval
+    end
+  end
+
   class PHPTernary < Treetop::Runtime::SyntaxNode
     def true?
       chosen_option.true?
