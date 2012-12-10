@@ -4,12 +4,12 @@ Treetop.load(File.dirname(__FILE__) + '/php')
 module PHP
   class PHPNestedTernary < Treetop::Runtime::SyntaxNode
     def eval
-      rest_ternaries.elements.inject(first.chosen_option) { |condition, ternary|
+      rest_ternaries.elements.inject(first.chosen_option) { |condition, options|
         condition =
           if condition.true?
-            ternary.options.value_if_true
+            options.value_if_true
           else
-            ternary.options.value_if_false
+            options.value_if_false
           end
       }.eval
     end
