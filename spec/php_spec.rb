@@ -8,13 +8,25 @@ describe PHP do
   # These are only here to unit-test the language components
   describe "expressions" do
     describe "booleans" do
-      specify {
-        expect(parser.parse("TRUE").eval).to be_true
-      }
+      describe "TRUE" do
+        specify {
+          expect(parser.parse("TRUE").eval).to be_true
+        }
 
-      specify {
-        expect(parser.parse("FALSE").eval).to be_false
-      }
+        specify {
+          expect(parser.parse("TRUE").to_s).to be == "1"
+        }
+      end
+
+      describe "FALSE" do
+        specify {
+          expect(parser.parse("FALSE").eval).to be_false
+        }
+
+        specify {
+          expect(parser.parse("FALSE").to_s).to be == ""
+        }
+      end
     end
 
     describe "strings" do
