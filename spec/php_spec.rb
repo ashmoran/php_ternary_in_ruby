@@ -75,6 +75,14 @@ describe PHP do
           parser.parse('FALSE ? "a" : FALSE ? "b" : "c"').eval
         ).to be == "c"
       end
+
+      context "twice" do
+        example do
+          expect(
+            parser.parse('TRUE ? "a" : TRUE ? "b" : TRUE ? "c" : "d"').eval
+          ).to be == "c"
+        end
+      end
     end
   end
 end
