@@ -49,7 +49,7 @@ I'd love to test how this behaves in a real interpreter, but I don't have PHP in
 [jam]: http://madlab.org.uk/content/manchester-raspberry-jam-7/
 [common]: http://www.aplacecalledcommon.co.uk/
 [jack]: https://twitter.com/JackWeirdy
-[image]: ./img/php_ternary.png "Go home, PHP, you're drunk"
+[image]: https://raw.github.com/ashmoran/php_ternary_in_ruby/master/img/php_ternary.png "Go home, PHP, you're drunk"
 [post]: https://alpha.app.net/wildpeaks/post/1667694
 [imgur]: http://i.imgur.com/aAY28.png
 [book]: http://pragprog.com/book/tpdsl/language-implementation-patterns
