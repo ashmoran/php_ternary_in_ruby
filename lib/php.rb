@@ -2,34 +2,12 @@ require 'treetop'
 Treetop.load(File.dirname(__FILE__) + '/php')
 
 module PHP
-  class PHPNestedTernary < Treetop::Runtime::SyntaxNode
-    def eval
-      rest_ternaries.elements.inject(first.chosen_option) { |condition, options|
-        condition =
-          if condition.true?
-            options.value_if_true
-          else
-            options.value_if_false
-          end
-      }.eval
-    end
-  end
-
   class PHPTernary < Treetop::Runtime::SyntaxNode
-    def true?
-      chosen_option.true?
-    end
-
-    def chosen_option
-      if condition.true?
-        options.value_if_true
-      else
-        options.value_if_false
-      end
-    end
-
     def eval
-      chosen_option.eval
+      rest_ternaries.elements.inject(condition) { |condition, options|
+        # It would seem ironic to not use a ternary operator in the implementation...
+        condition = condition.true? ? options.value_if_true : options.value_if_false
+      }.eval
     end
   end
 

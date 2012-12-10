@@ -1,14 +1,10 @@
 grammar PHP
   rule program
-    nested_ternary / ternary / value
-  end
-
-  rule nested_ternary
-    first:ternary rest_ternaries:options+ <PHPNestedTernary>
+    ternary / value
   end
 
   rule ternary
-    condition:value options:options <PHPTernary>
+    condition:value rest_ternaries:options+ <PHPTernary>
   end
 
   rule options
@@ -16,7 +12,7 @@ grammar PHP
   end
 
   rule value
-    boolean / string
+    boolean / string / ternary
   end
 
   rule boolean
