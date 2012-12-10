@@ -2,7 +2,7 @@
 
 ## Rather uninteresting backstory
 
-So after the [Manchester Raspberry Jam 7][jam] in December 2012, a few people hung around in [Common][common] after, and [@JackWeardy][jack] showed us this image:
+So after the [Manchester Raspberry Jam 7][jam] in December 2012, a few people hung around in [Common][common] after, and [@JackWeirdy][jack] showed us this image:
 
 ![Go home, PHP, you're drunk][image]
 
