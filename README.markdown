@@ -28,7 +28,7 @@ Which (if you squint at it) you'll realise PHP must be interpreting like this...
 
 ... not this ...
 
-    TRUE ? ("a" : TRUE ? "b" : "c")
+    TRUE ? ("a") : (TRUE ? "b" : "c")
 
 ... which is how you'd expect any sane language to see it.
 
